@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Casamento Isabel & Carlos</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans&family=Inria+Serif&family=Playfair+Display&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --rosa-principal: #d26972;
+      --marrom: #986358;
+      --cinza-claro: #d9d9d9;
+      --cinza-escuro: #7a7878;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'DM Sans', sans-serif;
+      background-image: url('fundo.jpg.jpg');
+      background-size: cover;
+      background-repeat: repeat;
+      background-attachment: fixed;
+      color: var(--cinza-escuro);
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      margin-top: 3rem;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 3rem;
+      text-align: center;
+      font-family: 'Playfair Display', cursive;
+      color: var(--rosa-principal);
+      margin: 0.5rem 0;
+    }
+
+    h2 {
+      text-align: center;
+      font-family: 'Inria Serif', serif;
+      color: var(--marrom);
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .data-hora {
+      text-align: center;
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin-bottom: 2rem;
+    }
+
+    .info-local {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .info-local div {
+      flex: 1 1 300px;
+      text-align: center;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 500px;
+      margin: auto;
+    }
+
+    input, button {
+      padding: 0.8rem;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    button {
+      background-color: var(--rosa-principal);
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: var(--marrom);
+    }
+
+    /* ESTILOS PARA LISTA DE PRESENTES */
+    .presentes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .presente-card {
+      background: #fff;
+      padding: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .presente-card h3 {
+      margin-bottom: 0.5rem;
+      color: var(--rosa-principal);
+    }
+
+    .presente-card img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 8px;
+        margin-bottom: 10px;
+    }
+
+    .pix-info {
+        margin-top: 2rem;
+        text-align: center;
+        padding: 1rem;
+        border: 1px dashed var(--rosa-principal);
+        border-radius: 12px;
+    }
+
+    .pix-info img {
+        width: 150px;
+        height: 150px;
+        border-radius: 8px;
+        margin-bottom: 5px;
+    }
+    /* FIM DOS ESTILOS DA LISTA DE PRESENTES */
+
+    .galeria {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .galeria img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 20px;
+      border: 3px solid var(--rosa-principal);
+    }
+
+    audio {
+      display: none;
+    }
+
+    .historia-section {
+        margin-top: 2rem;
+        text-align: center;
+        padding-top: 1rem;
+        border-top: 1px solid var(--cinza-claro);
+    }
+    
+    /* NOVO ESTILO PARA O ENDEREÇO DE ENTREGA */
+    .delivery-info {
+        text-align: center;
+        margin: 3rem 0;
+        padding: 1.5rem;
+        border-top: 1px dashed var(--rosa-principal);
+        border-bottom: 1px dashed var(--rosa-principal);
+    }
+
+    .delivery-info p {
+        margin: 0.5rem 0;
+        font-size: 1.1rem;
+        color: var(--cinza-escuro);
+    }
+
+    .delivery-info .address-text {
+        font-weight: bold;
+        color: var(--rosa-principal);
+        font-size: 1.2rem;
+    }
+
+    /* ESTILOS PARA OS BOTÕES DE ABAS */
+    .tab-buttons {
+      text-align: center;
+      margin-bottom: 2rem;
+      border-bottom: 2px solid var(--rosa-principal);
+      padding-bottom: 10px;
+    }
+
+    .tab-buttons button {
+      background-color: var(--cinza-claro);
+      color: var(--marrom);
+      padding: 0.7rem 1.5rem;
+      border-radius: 20px;
+      margin: 0 5px;
+      border: none;
+      font-weight: bold;
+      transition: background-color 0.2s, color 0.2s;
+    }
+
+    .tab-buttons button.active {
+      background-color: var(--rosa-principal);
+      color: white;
+    }
+
+    /* SEÇÕES DE CONTEÚDO */
+    .content-section {
+        padding: 1rem 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Isabel & Carlos</h1>
+    <h2>Com muita alegria, convidam você para celebrar essa união</h2>
+    <div class="data-hora">08 de Novembro de 2025 às 16h</div>
+
+    <div class="info-local">
+      <div>
+        <h3>Cerimônia</h3>
+        <p>Paróquia de Santa Helena<br>R. Maranhão, 875<br>Bairro Funcionários</p>
+      </div>
+      <div>
+        <h3>Recepção</h3>
+        <p>Na Casa de Tereza<br>R. Hermílo Alves, 469<br>Bairro Santa Tereza</p>
+      </div>
+    </div>
+
+    <div class="tab-buttons">
+      <button id="btn-presenca" class="active">Confirmação de Presença</button>
+      <button id="btn-presentes">Lista de Presentes</button>
+    </div>
+    
+    <div id="section-presenca" class="content-section">
+      <div class="form-section">
+        <h2>Confirme sua presença</h2>
+        <form action="https://formsubmit.co/isabelecarlos87@gmail.com" method="POST">
+          <input type="text" name="Nome Completo" placeholder="Seu nome" required />
+          <button type="submit">Confirmar Presença</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="section-presentes" class="content-section" style="display: none;">
+        <h2>Lista de Presentes</h2>
+        <p>O nosso maior presente é a sua presença, mas caso queiram nos presentear, o endereço para entrega: <br>
+           **Rua Cervantes, 75 - São Lucas** <br>
+           **Cep: 30240-200**
+        </p>
+
+<div class="presentes-grid" id="presentes-grid">
+  <div class="presente-card" data-gift-name="Jogo de Panelas de Cerâmica">
+    <h3>Jogo de Panelas de Cerâmica</h3>
+    <img src="imagens/presente_1.png" alt="Jogo de Panelas de Cerâmica"> 
+    <form action="https://formsubmit.co/isabelecarlos87@gmail.com" method="POST">
+      <input type="hidden" name="Presente Reservado" value="Jogo de Panelas de Cerâmica">
+      <input type="text" name="Nome de Quem Reservou" placeholder="Seu nome" required />
+      <button type="submit">Reservar</button>
+    </form>
+  </div>
+
+  <div class="presente-card" data-gift-name="Aparelho de Jantar 30 Peças">
+    <h3>Aparelho de Jantar 30 Peças</h3>
+    <img src="imagens/presente_2.png" alt="Aparelho de Jantar 30 Peças"> 
+    <form action="https://formsubmit.co/isabelecarlos87@gmail.com" method="POST">
+      <input type="hidden" name="Presente Reservado" value="Aparelho de Jantar 30 Peças">
+      <input type="text" name="Nome de Quem Reservou" placeholder="Seu nome" required />
+      <button type="submit">Reservar</button>
+    </form>
+  </div>
+  
+  <div class="presente-card" data-gift-name="Conjunto de Talheres 72 Peças">
+    <h3>Conjunto de Talheres 72 Peças</h3>
+    <img src="imagens/presente_3.png" alt="Conjunto de Talheres 72 Peças">
+    <form action="https://formsubmit.co/isabelecarlos87@gmail.com" method="POST">
+      <input type="hidden" name="Presente Reservado" value="Conjunto de Talheres 72 Peças">
+      <input type="text" name="Nome de Quem Reservou" placeholder="Seu nome" required />
+      <button type="submit">Reservar</button>
+    </form>
+  </div>
+
+  <div class="presente-card" data-gift-name="Conjunto de Copos de Vidro">
+    <h3>Conjunto de Copos de Vidro</h3>
+    <img src="imagens/presente_4.png" alt="Conjunto de Copos de Vidro">
+    <form action="https://formsubmit.co/isabelecarlos87@gmail.com" method="POST">
+      <input type="hidden" name="Presente Reservado" value="Conjunto de Copos de Vidro">
+      <input type="text" name="Nome de Quem Reservou" placeholder="Seu nome" required />
+      <button type="submit">Reservar</button>
+    </form>
+  </div>
+
+  <div class="presente-card" data-gift-name="Petisqueira">
+    <h3>Petisqueira</h3>
+    <img src="imagens/presente_5.png" alt="Petisqueira">
+    <form action="https://formsubmit.co/isabelecarlos87@gmail.com" method="POST">
+      <input type="hidden" name="Presente Reservado" value="Petisqueira">
+      <input type="text" name="Nome de Quem Reservou" placeholder="Seu nome" required />
+      <button type="submit">Reservar</button>
+    </form>
+  </div>
+
+  <div class="presente-card" data-gift-name="Jogo de Tigelas de Porcelana">
+    <h3>Jogo de Tigelas de Porcelana</h3>
+    <img src="imagens/presente_6.png" alt="Jogo de Tigelas de Porcelana">
+    <form action="https://formsubmit.co/isabelecarlos87@gmail.com" method="POST">
+      <input type="hidden" name="Presente Reservado" value="Jogo de Tigelas de Porcelana">
+      <input type="text" name="Nome de Quem Reservou" placeholder="Seu nome" required />
+      <button type="submit">Reservar</button>
+    </form>
+  </div>
+
+  <div class="presente-card" data-gift-name="Tábua de Corte Inox">
+    <h3>Tábua de Corte Inox</h3>
+    <img src="imagens/presente_7.png" alt="Tábua de Corte Inox">
+    <form action="https://formsubmit.co/isabelecarlos87@gmail.com" method="POST">
+      <input type="hidden" name="Presente Reservado" value="Tábua de Corte Inox">
+      <input type="text" name="Nome de Quem Reservou" placeholder="Seu nome" required />
+      <button type="submit">Reservar</button>
+    </form>
+  </div>
+
+  <div class="presente-card" data-gift-name="Varal de Chão Dobrável">
+    <h3>Varal de Chão Dobrável</h3>
+    <img src="imagens/presente_8.png" alt="Varal de Chão Dobrável">
+    <form action="https://formsubmit.co/isabelecarlos87@gmail.com" method="POST">
+      <input type="hidden" name="Presente Reservado" value="Varal de Chão Dobrável">
+      <input type="text" name="Nome de Quem Reservou" placeholder="Seu nome" required />
+      <button type="submit">Reservar</button>
+    </form>
+  </div>
+
+  <div class="presente-card" data-gift-name="Ferro de Passar a Vapor Ultragliss Plus">
+    <h3>Ferro de Passar a Vapor Ultragliss Plus</h3>
+    <img src="imagens/presente_9.png" alt="Ferro de Passar a Vapor Ultragliss Plus">
+    <form action="https://formsubmit.co/isabelecarlos87@gmail.com" method="POST">
+      <input type="hidden" name="Presente Reservado" value="Ferro de Passar a Vapor Ultragliss Plus">
+      <input type="text" name="Nome de Quem Reservou" placeholder="Seu nome" required />
+      <button type="submit">Reservar</button>
+    </form>
+  </div>
+
+  <div class="presente-card" data-gift-name="Tábua de Passar Roupa">
+    <h3>Tábua de Passar Roupa</h3>
+    <img src="imagens/presente_10.png" alt="Tábua de Passar Roupa">
+    <form action="https://formsubmit.co/isabelecarlos87@gmail.com" method="POST">
+      <input type="hidden" name="Presente Reservado" value="Tábua de Passar Roupa">
+      <input type="text" name="Nome de Quem Reservou" placeholder="Seu nome" required />
+      <button type="submit">Reservar</button>
+    </form>
+  </div>
+
+  <div class="presente-card" data-gift-name="Cesto de Roupa em Bambu">
+    <h3>Cesto de Roupa em Bambu</h3>
+    <img src="imagens/presente_11.png" alt="Cesto de Roupa em Bambu">
+    <form action="https://formsubmit.co/isabelecarlos87@gmail.com" method="POST">
+      <input type="hidden" name="Presente Reservado" value="Cesto de Roupa em Bambu">
+      <input type="text" name="Nome de Quem Reservou" placeholder="Seu nome" required />
+      <button type="submit">Reservar</button>
+    </form>
+  </div>
+
+  <div class="presente-card" data-gift-name="Climatizador">
+    <h3>Climatizador</h3>
+    <img src="imagens/presente_12.png" alt="Climatizador">
+    <form action="https://formsubmit.co/isabelecarlos87@gmail.com" method="POST">
+      <input type="hidden" name="Presente Reservado" value="Climatizador">
+      <input type="text" name="Nome de Quem Reservou" placeholder="Seu nome" required />
+      <button type="submit">Reservar</button>
+    </form>
+  </div>
+</div>
+        
+        <div class="delivery-info">
+            <p>O nosso maior presente é a sua presença, mas caso queiram nos presentear, o endereço para entrega:</p>
+            <p class="address-text">Rua Cervantes, 75 - São Lucas &mdash; Cep: 30240-200</p>
+        </div>
+
+        <div class="pix-info">
+          <h2>Ou, se preferir, um presente em Pix</h2>
+          <p>Você pode contribuir com o valor que se sentir à vontade, utilizando o QR Code ou a chave abaixo.</p>
+          <img src="qr_code_pix.png.jpg" alt="QR Code para Pix">
+          <p>Chave Pix: isabelecarlos87@gmail.com</p>
+        </div>
+    </div>
+
+    <div class="historia-section">
+        <h2>Nossa História</h2>
+        
+        <p>Há mais de uma década, nos encontramos naquele teatro e depois tomamos um suco naquele café cultura. </p>
+        
+        <p>Conversando por mensagem de texto, Facebook, porque nem existia WhatsApp… Nenhum de nós imaginaria o quanto aquelas conversas, e tantos momentos vividos, iriam se transformar nessa história linda!</p>
+        
+        <p>Uma história cheia de emoções, risadas, desafios, crescimento… Ahh o crescimento, e o amadurecimento, foram peça fundamental em todo o nosso relacionamento! E continuamos, nesse processo, aprendendo e amadurecendo sempre… Porque é isso que nos mantém caminhando lado a lado ♥</p>
+
+        <p>Vivemos tantos momentos, tantas viagens, risadas, choros e angústias…. Mas o mais importante é que aprendemos sobre o companheirismo e ser companheiros um do outro! 🥰</p>
+
+        <p>Agora estamos prontos para começar mais essa nova fase, com o coração em festa, e cheio de amor, estamos abertos para viver os nossos melhores momentos da vida! Deus tem nos abençoado e guiado até aqui! 🙏🏻✨✨</p>
+
+        <p>Os amigos e familiares tem nos acompanhado, e apoiado, sempre! 🥰</p>
+
+        <p>Prontos para viverem conosco essa nova fase!?<br>
+        Bel e Carlinhos vão se casar! <br>
+        👰🏼‍♀♥👨🏻‍✈</p>
+    </div>
+
+    <div class="galeria-section">
+      <h2>Galeria de Memórias</h2>
+      <div class="galeria">
+        <img src="foto1.jpg" alt="foto">
+        <img src="foto4.jpg" alt="foto">
+        <img src="foto2.jpg" alt="foto">
+        <img src="foto3.jpg" alt="foto">
+        <img src="foto5.jpg" alt="foto">
+        <img src="foto6.jpg" alt="foto">
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const btnPresenca = document.getElementById('btn-presenca');
+    const btnPresentes = document.getElementById('btn-presentes');
+    const sectionPresenca = document.getElementById('section-presenca');
+    const sectionPresentes = document.getElementById('section-presentes');
+
+    // Funções para manipulação do DOM e Lógica de LocalStorage (Memória Local)
+
+    const RESERVATION_KEY = 'gift_reserved_by_user'; // Chave para memória local
+
+    // Função para checar a reserva ao carregar a página
+    function checkReservation() {
+        const reservedGiftName = localStorage.getItem(RESERVATION_KEY);
+        if (reservedGiftName) {
+            // Esconde todos os cartões e mostra uma mensagem de "já reservado"
+            document.querySelectorAll('.presente-card').forEach(card => {
+                card.style.display = 'none'; 
+            });
+            
+            // Oculta o botão de aba "Lista de Presentes" (opcional, mas limpa a UI)
+            document.getElementById('btn-presentes').style.display = 'none';
+
+            // Adiciona a mensagem de presente reservado
+            let msg = document.createElement('h3');
+            msg.innerHTML = `Obrigado! Você já reservou o presente: <strong>${reservedGiftName}</strong>.`;
+            msg.style.color = 'var(--rosa-principal)';
+            msg.style.marginTop = '2rem';
+            msg.style.textAlign = 'center';
+            document.getElementById('presentes-grid').before(msg); // Adiciona antes da grid
+
+            // Oculta a grid de presentes e o pix-info após a mensagem para não poluir
+            document.getElementById('presentes-grid').style.display = 'none';
+            document.querySelector('.pix-info').style.display = 'none';
+        }
+    }
+
+    // Chamada ao carregar a página
+    window.onload = checkReservation;
+
+    // Lógica para mostrar e esconder as seções
+    function showSection(showId, hideId, activeBtn, inactiveBtn) {
+        document.getElementById(showId).style.display = 'block';
+        document.getElementById(hideId).style.display = 'none';
+        activeBtn.classList.add('active');
+        inactiveBtn.classList.remove('active');
+    }
+
+    btnPresenca.addEventListener('click', () => {
+        showSection('section-presenca', 'section-presentes', btnPresenca, btnPresentes);
+    });
+
+    btnPresentes.addEventListener('click', () => {
+        showSection('section-presentes', 'section-presenca', btnPresentes, btnPresenca);
+    });
+
+    // Lógica de Submissão de Presentes
+    const forms = document.querySelectorAll('#section-presentes .presente-card form');
+
+    forms.forEach(form => {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault(); 
+        
+        // Verifica se já reservou nesta sessão (memória temporária) OU se a memória local existe
+        if (localStorage.getItem(RESERVATION_KEY)) {
+          alert("Você já reservou um presente! Para alterar, entre em contato com os noivos.");
+          return;
+        }
+
+        const giftName = form.querySelector('input[name="Presente Reservado"]').value;
+
+        // 1. Ação de Memória: Salva a reserva no navegador do usuário
+        localStorage.setItem(RESERVATION_KEY, giftName);
+
+        // 2. Ação Visual: Faz todos os presentes sumirem
+        document.querySelectorAll('.presente-card').forEach(card => {
+            card.style.display = 'none'; 
+        });
+        document.getElementById('btn-presentes').style.display = 'none'; // Oculta o botão de aba
+
+        // 3. Feedback e Disparo do Forms
+        alert('Presente reservado! Você será redirecionado para a página de confirmação do Formsubmit.');
+        
+        setTimeout(() => {
+            form.removeEventListener('submit', arguments.callee);
+            form.submit(); // Envia para o e-mail
+        }, 50);
+      });
+    });
+
+    // Lógica de alerta para o RSVP
+    const rsvpForm = document.querySelector('#section-presenca form');
+    rsvpForm.addEventListener('submit', function(e) {
+        alert("Presença confirmada! Você será redirecionado para a página de confirmação do Formsubmit.");
+    });
+  </script>
+</body>
+</html>
